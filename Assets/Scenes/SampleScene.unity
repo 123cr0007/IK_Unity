@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 47006108}
   - component: {fileID: 47006107}
   m_Layer: 5
-  m_Name: Angle_1
+  m_Name: Ang_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X
+  m_Text: A0
 --- !u!222 &64269805
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -572,7 +572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: J0
+  m_Text: PX
 --- !u!222 &512678633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 719918885}
   - component: {fileID: 719918884}
   m_Layer: 5
-  m_Name: Pos_X
+  m_Name: Ref_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,10 +1088,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 47
+    m_FontSize: 38
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 44
+    m_MinSize: 38
     m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1099,9 +1099,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Y
-
-'
+  m_Text: A1
 --- !u!222 &1119898226
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1274,7 +1272,7 @@ GameObject:
   - component: {fileID: 1371669226}
   - component: {fileID: 1371669225}
   m_Layer: 5
-  m_Name: Angle_0
+  m_Name: Ang_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1557,10 +1555,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1221278848}
   m_HandleRect: {fileID: 1798076356}
   m_Direction: 0
-  m_MinValue: -90
-  m_MaxValue: 90
+  m_MinValue: 0.1
+  m_MaxValue: 4
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1745,10 +1743,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 680884701}
   m_HandleRect: {fileID: 686703474}
   m_Direction: 0
-  m_MinValue: -90
-  m_MaxValue: 90
+  m_MinValue: 0.1
+  m_MaxValue: 4
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2183,7 +2181,7 @@ GameObject:
   - component: {fileID: 2035337471}
   - component: {fileID: 2035337470}
   m_Layer: 5
-  m_Name: Pos_Y
+  m_Name: Ref_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2369,7 +2367,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: J1
+  m_Text: PY
 --- !u!222 &2084340295
 CanvasRenderer:
   m_ObjectHideFlags: 0

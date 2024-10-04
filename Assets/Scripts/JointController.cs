@@ -18,45 +18,80 @@ namespace InverseKinematics
         private GameObject[] angText = new GameObject[2];
         private GameObject[] posText = new GameObject[2];
 
-		// Start is called before the first frame update
-		void Start()
+        // Start is called before the first frame update
+        void Start()
         {
-			// robot
+            // robot
             for (int i = 0; i < joint.Length; i++)
             {
                 joint[i] = GameObject.Find("Joint_" + i.ToString());
                 arm[i] = GameObject.Find("Arm_" + i.ToString());
-                armL[i] = arm[i].transform.localScale.x;
+                armL[i] = arm[i].transform.localScale.x;    // get arm length
             }
-
             // UI settings
             for (int i = 0; i < joint.Length; i++)
             {
                 slider[i] = GameObject.Find("Slider_" + i.ToString());
-                angText[i] = GameObject.Find("Angle_" + i.ToString());
                 sliderVal[i] = slider[i].GetComponent<Slider>().value;
+                posText[i] = GameObject.Find("Ref_" + i.ToString());
+                angText[i] = GameObject.Find("Ang_" + i.ToString());
             }
-
-            posText[0] = GameObject.Find("Pos_X");
-            posText[1] = GameObject.Find("Pos_Y");
-		}
+            // 中村俊幸.Unityで学ぶ ロボットアームの逆運動学(MRブックス) (pp.25 - 26). Kindle 版. 
+        }
 
         // Update is called once per frame
         void Update()
         {
-			for (int i = 0; i < joint.Length; i++)
+            // get slider value
+            for (int i = 0; i < joint.Length; i++)
             {
                 sliderVal[i] = slider[i].GetComponent<Slider>().value;
-                angText[i].GetComponent<Text>().text = sliderVal[i].ToString("f2");
-                angle[i].z = sliderVal[i]; joint[i].transform.localEulerAngles = angle[i];
             }
-			float px = armL[0] * Mathf.Cos(angle[0].z * Mathf.Deg2Rad) + armL[1]
-                        * Mathf.Cos((angle[0].z + angle[1].z) * Mathf.Deg2Rad);
-            float py = armL[0] * Mathf.Sin(angle[0].z * Mathf.Deg2Rad) + armL[1]
-                        * Mathf.Sin((angle[0].z + angle[1].z) * Mathf.Deg2Rad);
-            
-            posText[0].GetComponent<Text>().text = px.ToString("f2");
-            posText[1].GetComponent<Text>().text = py.ToString("f2");
-		}
+
+            // memo
+            /*{
+                余弦定理を使う
+                ボーンの長さをl1,l2,第一ルートの始点の内角をα外角をｑ1、第二ルートの始点の内角をβ外角をｑ2とすると、
+                l1^2 + l2^2 - 2 * l1 * l2 * cos(θ) = x^2 + y^2となり、
+                l2^2 = l1^2+ x^2 + y^2 - 2 * l1 * √(x^2 + y^2) * cos(θ)となる。
+                そのため
+                α = cos^-1 * (l1^2 + l2^2 - x^2 - y^2
+                    / 2 * l1^2 * l2^2)
+                β = cos^-1 * (x^2 + y^2 + l1^2 - l2^2
+                    / 2 * l1 * √(x^2 + y^2))
+                山折りで曲げる場合
+                q1 = tan^-1 * (y/x) - β
+                q2 = π -\+ α
+                谷折りで曲げる場合
+                q1 = tan^-1 * (y/x) - β
+                q2 = π - α
+            }*/
+
+            // inverse kinematics
+            float x = sliderVal[0];
+            float y = sliderVal[1];
+
+            // calculate angle
+            float a = Mathf.Acos((armL[0] * armL[0] + armL[1] * armL[1] - x * x - y * y) 
+                / (2f * armL[0] * armL[1]));
+            float b = Mathf.Acos((armL[0] * armL[0] + x * x + y * y - armL[1] * armL[1])
+                / (2f * armL[0] * Mathf.Pow((x * x + y * y), 0.5f)));
+
+            angle[1].z = -Mathf.PI + a;
+            angle[0].z = Mathf.Atan2(y, x) + b;
+
+            // set angle
+            for (int i = 0; i < joint.Length; i++)
+            {
+                joint[i].transform.localEulerAngles = angle[i] * Mathf.Rad2Deg;
+                posText[i].GetComponent<Text>().text = sliderVal[i].ToString("f2");
+            }
+
+            angText[0].GetComponent<Text>().text = (angle[0].z * Mathf.Rad2Deg).ToString("f2");
+            angText[1].GetComponent<Text>().text = (angle[1].z * Mathf.Rad2Deg).ToString("f2");
+
+           // 中村俊幸.Unityで学ぶ ロボットアームの逆運動学(MRブックス) (pp.26 - 27). Kindle 版. 
+
+        }
     }
 }
